@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .topCont {
+            width: 1000px;
+            height: 1000px;
+        }
+        
+        img {
+            padding: 5px;
+        }
+        .mainBody {
+            margin: auto;
+            width: 50%;
+            text-align: center;
+        }
+        button {
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body>
+    <div class="mainBody">
+        <h1>Monkey Shuffle</h1>
+        <div id="image-container" class="topCont"></div>
+        <button id="shuffleImages">Shuffle Images</button>        
+    </div>
+    <script>
+        const images = [
+            'https://picsum.photos/id/10/300',
+            'https://picsum.photos/id/11/300',
+            'https://picsum.photos/id/12/300',
+            'https://picsum.photos/id/13/300',
+            'https://picsum.photos/id/14/300',
+            'https://picsum.photos/id/15/300',
+            'https://picsum.photos/id/16/300',
+            'https://picsum.photos/id/17/300',
+            'https://picsum.photos/id/18/300'
+        ];
+
+        const container = document.getElementById("image-container");
+
+        function shuffleImages() {
+            const shuffledImages = images.sort(() => Math.random() - 0.5);
+            container.innerHTML = '';
+            shuffledImages.forEach(imageUrl => {
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                container.appendChild(img);
+            });
+        }
+
+        document.getElementById('shuffleImages').addEventListener('click', shuffleImages);
+        shuffleImages();
+    </script>
+</body>
+</html>
