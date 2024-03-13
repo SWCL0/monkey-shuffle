@@ -42,20 +42,40 @@
             'https://picsum.photos/id/18/300'
         ];
 
-        const container = document.getElementById("image-container");
+        function shuffleEnVertoonFotos(array) {
+            var shuffledImages = shuffleImages(array);
+            var container = document.getElementById("image-container");
+            container.innerHTML = ''; // verwijderd vorige foto's uit div/container
 
-        function shuffleImages() {
-            const shuffledImages = images.sort(() => Math.random() - 0.5);
-            container.innerHTML = '';
-            shuffledImages.forEach(imageUrl => {
-                const img = document.createElement('img');
-                img.src = imageUrl;
-                container.appendChild(img);
-            });
+            shuffledImages.forEach(function(imageUrl) { // zet de foto's terug in div/container
+                var imgElement = document.createElement('img');
+                imgElement.src = imageUrl;
+                container.appendChild(imgElement);
+            });                       
         }
 
-        document.getElementById('shuffleImages').addEventListener('click', shuffleImages);
-        shuffleImages();
+        function shuffleImages(array) {
+            // gaat door iedere index van de array
+            for (let i = array.length - 1; i > 0; i--) {
+                // voor elke 'i' word een random 'j' aangemaakt tussen '0' en 'i'
+                //dit zorgt ervoor dat er een random index word gekozen uit de array
+                const j = Math.floor(Math.random() * (i + 1));
+                // elementen bij 'i' en 'j' worden gewisseld door destructuring assignment
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            shuffleEnVertoonFotos(images);
+
+
+            document.getElementById('shuffleImages').addEventListener('click', function() {
+                shuffleEnVertoonFotos(images);
+            });
+        });
+
+
+
     </script>
 </body>
 </html>
